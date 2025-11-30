@@ -1,722 +1,1094 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>诗意环保 - 守护绿水青山</title>
+  <!-- 引入外部资源 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2E7D32', // 深绿色（主色）
+            secondary: '#0288D1', // 蓝色（辅助色）
+            accent: '#81C784', // 浅绿色（强调色）
+            neutral: '#F5F5F5', // 浅灰色（中性色）
+            dark: '#263238', // 深灰色（文本色）
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['"Noto Serif SC"', 'serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+      .bg-blur {
+        backdrop-filter: blur(8px);
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  </style>
+  
+  <!-- 全局样式 -->
+  <style>
+    /* 导入中文字体 */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap');
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    
+    .poem-font {
+      font-family: 'Noto Serif SC', serif;
+    }
+    
+    /* 动画效果 */
+    .fade-in {
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    
+    .hover-scale:hover {
+      transform: scale(1.03);
+    }
+    
+    .card-shadow {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+  </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
+
+<body class="bg-neutral text-dark">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full z-50 transition-all duration-300">
+    <nav class="bg-transparent px-4 md:px-8 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center space-x-2">
+        <i class="fa fa-leaf text-primary text-2xl"></i>
+        <span class="text-white text-xl md:text-2xl font-bold text-shadow">诗意环保</span>
+      </a>
+      
+      <!-- 桌面导航 -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#home" class="text-white hover:text-accent transition-colors duration-300 text-shadow">首页</a>
+        <a href="#poems" class="text-white hover:text-accent transition-colors duration-300 text-shadow">诗词雅韵</a>
+        <a href="#status" class="text-white hover:text-accent transition-colors duration-300 text-shadow">环境现状</a>
+        <a href="#actions" class="text-white hover:text-accent transition-colors duration-300 text-shadow">环保行动</a>
+        <a href="#cases" class="text-white hover:text-accent transition-colors duration-300 text-shadow">成功案例</a>
+        <a href="#knowledge" class="text-white hover:text-accent transition-colors duration-300 text-shadow">环保知识</a>
+        <a href="#share" class="text-white hover:text-accent transition-colors duration-300 text-shadow">分享感悟</a>
+      </div>
+      
+      <!-- 移动端菜单按钮 -->
+      <button id="menuBtn" class="md:hidden text-white text-2xl">
+        <i class="fa fa-bars"></i>
+      </button>
+    </nav>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobileMenu" class="hidden md:hidden bg-primary/95 bg-blur py-4 px-6 fade-in">
+      <div class="flex flex-col space-y-4">
+        <a href="#home" class="text-white hover:text-accent transition-colors duration-300 py-2 border-b border-white/20">首页</a>
+        <a href="#poems" class="text-white hover:text-accent transition-colors duration-300 py-2 border-b border-white/20">诗词雅韵</a>
+        <a href="#status" class="text-white hover:text-accent transition-colors duration-300 py-2 border-b border-white/20">环境现状</a>
+        <a href="#actions" class="text-white hover:text-accent transition-colors duration-300 py-2 border-b border-white/20">环保行动</a>
+        <a href="#cases" class="text-white hover:text-accent transition-colors duration-300 py-2 border-b border-white/20">成功案例</a>
+        <a href="#knowledge" class="text-white hover:text-accent transition-colors duration-300 py-2 border-b border-white/20">环保知识</a>
+        <a href="#share" class="text-white hover:text-accent transition-colors duration-300 py-2">分享感悟</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 英雄区 -->
+  <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="https://picsum.photos/id/10/1920/1080" alt="绿水青山" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-primary/50"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 z-10 text-center fade-in">
+      <h1 class="text-[clamp(2.5rem,6vw,4rem)] font-bold text-white mb-6 poem-font text-shadow leading-tight">
+        绿水青山就是<br>金山银山
+      </h1>
+      <p class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-10 max-w-3xl mx-auto text-shadow">
+        传承古人对自然的敬畏之心，践行当代环保理念，让诗意山水永续流传
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#poems" class="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg">
+          品味诗词
+        </a>
+        <a href="#actions" class="bg-white/20 hover:bg-white/30 text-white font-semibold py-3 px-8 rounded-full border border-white/40 transition-all duration-300 hover:shadow-lg">
+          立即行动
+        </a>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
+      <a href="#poems" class="text-white text-3xl opacity-80 hover:opacity-100 transition-opacity">
+        <i class="fa fa-angle-down"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- 古诗词专区 -->
+  <section id="poems" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-primary mb-4 poem-font">诗词雅韵 · 道法自然</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">古人寄情山水，留下无数赞美自然的诗篇。这些诗词不仅是文学瑰宝，更蕴含着深刻的生态智慧。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 诗词卡片1 -->
+        <div class="bg-neutral rounded-xl overflow-hidden card-shadow hover-scale">
+          <div class="h-56 overflow-hidden">
+            <img src="https://picsum.photos/id/137/800/600" alt="田园风光" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-primary mb-2 poem-font">饮酒·其五</h3>
+            <p class="text-gray-500 mb-1">【东晋】陶渊明</p>
+            <div class="my-4 text-lg poem-font leading-relaxed">
+              结庐在人境，而无车马喧。<br>
+              问君何能尔？心远地自偏。<br>
+              采菊东篱下，悠然见南山。<br>
+              山气日夕佳，飞鸟相与还。<br>
+              此中有真意，欲辨已忘言。
             </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+            <div class="bg-primary/10 p-4 rounded-lg">
+              <h4 class="font-semibold text-primary mb-2">环保解读</h4>
+              <p class="text-gray-600 text-sm">诗人描绘了人与自然和谐共生的田园生活，体现了古人"天人合一"的生态智慧。在现代社会，我们更应追求这种与自然和谐相处的生活方式，减少对环境的破坏。</p>
+            </div>
+          </div>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+        
+        <!-- 诗词卡片2 -->
+        <div class="bg-neutral rounded-xl overflow-hidden card-shadow hover-scale">
+          <div class="h-56 overflow-hidden">
+            <img src="https://picsum.photos/id/180/800/600" alt="山居秋暝" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-primary mb-2 poem-font">山居秋暝</h3>
+            <p class="text-gray-500 mb-1">【唐】王维</p>
+            <div class="my-4 text-lg poem-font leading-relaxed">
+              空山新雨后，天气晚来秋。<br>
+              明月松间照，清泉石上流。<br>
+              竹喧归浣女，莲动下渔舟。<br>
+              随意春芳歇，王孙自可留。
+            </div>
+            <div class="bg-primary/10 p-4 rounded-lg">
+              <h4 class="font-semibold text-primary mb-2">环保解读</h4>
+              <p class="text-gray-600 text-sm">这首诗描绘了秋雨初晴后傍晚时分山村的旖旎风光，展现了自然之美与人类活动的和谐统一。王维的"诗中有画，画中有诗"，提醒我们要珍惜和保护这样的自然美景。</p>
+            </div>
+          </div>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
+        
+        <!-- 诗词卡片3 -->
+        <div class="bg-neutral rounded-xl overflow-hidden card-shadow hover-scale">
+          <div class="h-56 overflow-hidden">
+            <img src="https://picsum.photos/id/28/800/600" alt="江雪" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-primary mb-2 poem-font">江雪</h3>
+            <p class="text-gray-500 mb-1">【唐】柳宗元</p>
+            <div class="my-4 text-lg poem-font leading-relaxed">
+              千山鸟飞绝，万径人踪灭。<br>
+              孤舟蓑笠翁，独钓寒江雪。
             </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
+            <div class="bg-primary/10 p-4 rounded-lg">
+              <h4 class="font-semibold text-primary mb-2">环保解读</h4>
+              <p class="text-gray-600 text-sm">全诗描绘了一幅寂静的雪景图，虽极简却意境深远。在当今环境污染日益严重的背景下，这样纯粹的自然景象更显珍贵，提醒我们要保护生物多样性，维护生态平衡。</p>
             </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+          </div>
         </div>
-    </section>
-
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
+        
+        <!-- 诗词卡片4 -->
+        <div class="bg-neutral rounded-xl overflow-hidden card-shadow hover-scale">
+          <div class="h-56 overflow-hidden">
+            <img src="https://picsum.photos/id/110/800/600" alt="钱塘湖春行" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-primary mb-2 poem-font">钱塘湖春行</h3>
+            <p class="text-gray-500 mb-1">【唐】白居易</p>
+            <div class="my-4 text-lg poem-font leading-relaxed">
+              孤山寺北贾亭西，水面初平云脚低。<br>
+              几处早莺争暖树，谁家新燕啄春泥。<br>
+              乱花渐欲迷人眼，浅草才能没马蹄。<br>
+              最爱湖东行不足，绿杨阴里白沙堤。
             </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
+            <div class="bg-primary/10 p-4 rounded-lg">
+              <h4 class="font-semibold text-primary mb-2">环保解读</h4>
+              <p class="text-gray-600 text-sm">诗人用生动的笔触描绘了西湖早春的美景，展现了春天的生机与活力。这启示我们，保护自然环境就是保护这些美丽的自然景观和生物多样性，让后代也能欣赏到这样的春日盛景。</p>
             </div>
+          </div>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
+        
+        <!-- 诗词卡片5 -->
+        <div class="bg-neutral rounded-xl overflow-hidden card-shadow hover-scale">
+          <div class="h-56 overflow-hidden">
+            <img src="https://picsum.photos/id/129/800/600" alt="题破山寺后禅院" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-primary mb-2 poem-font">题破山寺后禅院</h3>
+            <p class="text-gray-500 mb-1">【唐】常建</p>
+            <div class="my-4 text-lg poem-font leading-relaxed">
+              清晨入古寺，初日照高林。<br>
+              曲径通幽处，禅房花木深。<br>
+              山光悦鸟性，潭影空人心。<br>
+              万籁此都寂，但余钟磬音。
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
+            <div class="bg-primary/10 p-4 rounded-lg">
+              <h4 class="font-semibold text-primary mb-2">环保解读</h4>
+              <p class="text-gray-600 text-sm">这首诗描绘了古寺周围宁静优美的自然环境，以及这种环境对人的心灵净化作用。它告诉我们，自然环境不仅具有生态价值，还具有重要的精神价值，保护自然就是保护我们的精神家园。</p>
             </div>
+          </div>
         </div>
-    </footer>
+        
+        <!-- 诗词卡片6 -->
+        <div class="bg-neutral rounded-xl overflow-hidden card-shadow hover-scale">
+          <div class="h-56 overflow-hidden">
+            <img src="https://picsum.photos/id/235/800/600" alt="观书有感二首·其一" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-primary mb-2 poem-font">观书有感二首·其一</h3>
+            <p class="text-gray-500 mb-1">【宋】朱熹</p>
+            <div class="my-4 text-lg poem-font leading-relaxed">
+              半亩方塘一鉴开，天光云影共徘徊。<br>
+              问渠那得清如许？为有源头活水来。
+            </div>
+            <div class="bg-primary/10 p-4 rounded-lg">
+              <h4 class="font-semibold text-primary mb-2">环保解读</h4>
+              <p class="text-gray-600 text-sm">这首诗以池塘为喻，说明了"源头活水"的重要性。在环境保护中，这启示我们要从源头上治理污染，保护生态系统的完整性和可持续性，才能保持环境的清洁和健康。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+  <!-- 环境现状 -->
+  <section id="status" class="py-20 bg-gradient-to-b from-neutral to-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-primary mb-4 poem-font">环境现状 · 数据洞察</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">了解当前环境状况，是我们采取有效环保行动的基础。以下数据反映了全球及我国的环境现状。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- 左侧图表区域 -->
+        <div class="bg-white rounded-xl p-6 card-shadow">
+          <h3 class="text-xl font-semibold text-primary mb-6">全球碳排放趋势 (亿吨)</h3>
+          <div class="h-80">
+            <canvas id="carbonChart"></canvas>
+          </div>
+        </div>
+        
+        <!-- 右侧数据卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- 数据卡片1 -->
+          <div class="bg-white rounded-xl p-6 card-shadow hover-scale">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-semibold text-primary">森林覆盖率</h3>
+              <i class="fa fa-tree text-accent text-2xl"></i>
+            </div>
+            <div class="text-4xl font-bold text-primary mb-2">23.9%</div>
+            <p class="text-gray-600 text-sm">我国森林覆盖率已达23.9%，较十年前提高了2.3个百分点，生态环境持续改善。</p>
+          </div>
+          
+          <!-- 数据卡片2 -->
+          <div class="bg-white rounded-xl p-6 card-shadow hover-scale">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-semibold text-primary">空气质量优良率</h3>
+              <i class="fa fa-cloud text-accent text-2xl"></i>
+            </div>
+            <div class="text-4xl font-bold text-primary mb-2">86.5%</div>
+            <p class="text-gray-600 text-sm">2023年全国地级及以上城市空气质量优良天数比例达到86.5%，同比提高1.9个百分点。</p>
+          </div>
+          
+          <!-- 数据卡片3 -->
+          <div class="bg-white rounded-xl p-6 card-shadow hover-scale">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-semibold text-primary">水资源合格率</h3>
+              <i class="fa fa-tint text-accent text-2xl"></i>
+            </div>
+            <div class="text-4xl font-bold text-primary mb-2">94.5%</div>
+            <p class="text-gray-600 text-sm">全国地表水国控断面水质优良比例达到94.5%，水环境质量持续改善，水生态环境状况稳中向好。</p>
+          </div>
+          
+          <!-- 数据卡片4 -->
+          <div class="bg-white rounded-xl p-6 card-shadow hover-scale">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-semibold text-primary">濒危物种保护</h3>
+              <i class="fa fa-paw text-accent text-2xl"></i>
+            </div>
+            <div class="text-4xl font-bold text-primary mb-2">74%</div>
+            <p class="text-gray-600 text-sm">我国74%的珍稀濒危野生动植物种群得到有效保护，生物多样性保护成效显著。</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 环境挑战说明 -->
+      <div class="mt-16 bg-primary/5 rounded-xl p-8 border border-primary/20">
+        <h3 class="text-xl font-semibold text-primary mb-4">当前面临的主要环境挑战</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="flex items-start">
+            <i class="fa fa-exclamation-circle text-secondary mt-1 mr-4"></i>
+            <div>
+              <h4 class="font-semibold text-dark mb-2">气候变化</h4>
+              <p class="text-gray-600 text-sm">全球气温持续上升，极端天气事件频发，对生态系统和人类社会造成严重影响。</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <i class="fa fa-exclamation-circle text-secondary mt-1 mr-4"></i>
+            <div>
+              <h4 class="font-semibold text-dark mb-2">环境污染</h4>
+              <p class="text-gray-600 text-sm">工业污染、农业污染和生活污染仍然存在，部分地区环境质量有待进一步改善。</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <i class="fa fa-exclamation-circle text-secondary mt-1 mr-4"></i>
+            <div>
+              <h4 class="font-semibold text-dark mb-2">生物多样性减少</h4>
+              <p class="text-gray-600 text-sm">栖息地破坏、过度开发等导致生物多样性面临威胁，生态系统功能受到影响。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
+  <!-- 环保行动 -->
+  <section id="actions" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-primary mb-4 poem-font">环保行动 · 从我做起</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">环保不是一句口号，而是每个人的责任。从小事做起，从身边做起，我们都能为环境保护贡献力量。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- 行动卡片1 -->
+        <div class="bg-neutral rounded-xl p-6 text-center card-shadow hover-scale">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa fa-leaf text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-primary mb-3">绿色出行</h3>
+          <p class="text-gray-600">优先选择步行、自行车或公共交通工具，减少汽车尾气排放，为改善空气质量贡献力量。</p>
+        </div>
+        
+        <!-- 行动卡片2 -->
+        <div class="bg-neutral rounded-xl p-6 text-center card-shadow hover-scale">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa fa-recycle text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-primary mb-3">垃圾分类</h3>
+          <p class="text-gray-600">做好生活垃圾分类，提高资源利用率，减少环境污染，让垃圾变废为宝。</p>
+        </div>
+        
+        <!-- 行动卡片3 -->
+        <div class="bg-neutral rounded-xl p-6 text-center card-shadow hover-scale">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa fa-tint text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-primary mb-3">节约用水</h3>
+          <p class="text-gray-600">养成节约用水的好习惯，随手关闭水龙头，合理利用水资源，共建节水型社会。</p>
+        </div>
+        
+        <!-- 行动卡片4 -->
+        <div class="bg-neutral rounded-xl p-6 text-center card-shadow hover-scale">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa fa-lightbulb-o text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-primary mb-3">节约用电</h3>
+          <p class="text-gray-600">使用节能电器，随手关灯，合理控制空调温度，减少能源消耗和碳排放。</p>
+        </div>
+        
+        <!-- 行动卡片5 -->
+        <div class="bg-neutral rounded-xl p-6 text-center card-shadow hover-scale">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa fa-shopping-bag text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-primary mb-3">减少塑料</h3>
+          <p class="text-gray-600">使用环保袋、玻璃杯等替代塑料制品，减少白色污染，保护土壤和海洋生态。</p>
+        </div>
+        
+        <!-- 行动卡片6 -->
+        <div class="bg-neutral rounded-xl p-6 text-center card-shadow hover-scale">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa fa-seedling text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-primary mb-3">植树造林</h3>
+          <p class="text-gray-600">积极参与植树造林活动，增加森林覆盖率，改善生态环境，减缓气候变化。</p>
+        </div>
+        
+        <!-- 行动卡片7 -->
+        <div class="bg-neutral rounded-xl p-6 text-center card-shadow hover-scale">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa fa-book text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-primary mb-3">学习环保</h3>
+          <p class="text-gray-600">学习环保知识，了解环境现状，提高环保意识，带动身边人共同参与环境保护。</p>
+        </div>
+        
+        <!-- 行动卡片8 -->
+        <div class="bg-neutral rounded-xl p-6 text-center card-shadow hover-scale">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa fa-share-alt text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-primary mb-3">宣传环保</h3>
+          <p class="text-gray-600">向家人、朋友宣传环保理念，分享环保知识，带动更多人参与到环保行动中来。</p>
+        </div>
+      </div>
+      
+      <!-- 环保承诺按钮 -->
+      <div class="text-center mt-12">
+        <button id="commitBtn" class="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg flex items-center mx-auto">
+          <i class="fa fa-handshake-o mr-2"></i> 我承诺践行环保行动
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 成功案例 -->
+  <section id="cases" class="py-20 bg-neutral">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-primary mb-4 poem-font">成功案例 · 砥砺前行</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">这些环保成功案例证明，只要我们坚持不懈地努力，就能改善环境，创造更美好的未来。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 案例卡片1 -->
+        <div class="bg-white rounded-xl overflow-hidden card-shadow hover-scale">
+          <div class="h-56 overflow-hidden">
+            <img src="https://picsum.photos/id/15/800/600" alt="塞罕坝林场" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-primary mb-2">塞罕坝林场建设</h3>
+            <p class="text-gray-600 mb-4">从"黄沙遮天日，飞鸟无栖树"的荒漠沙地，到如今"河的源头、云的故乡、花的世界、林的海洋"，塞罕坝人用55年时间创造了世界生态文明建设史上的奇迹。</p>
+            <div class="flex items-center text-sm text-gray-500">
+              <span class="flex items-center mr-4"><i class="fa fa-tree text-primary mr-1"></i> 森林覆盖率80%</span>
+              <span class="flex items-center"><i class="fa fa-calendar text-primary mr-1"></i> 1962年启动</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 案例卡片2 -->
+        <div class="bg-white rounded-xl overflow-hidden card-shadow hover-scale">
+          <div class="h-56 overflow-hidden">
+            <img src="https://picsum.photos/id/164/800/600" alt="三江源保护" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-primary mb-2">三江源生态保护</h3>
+            <p class="text-gray-600 mb-4">三江源是长江、黄河、澜沧江的发源地，被誉为"中华水塔"。通过建立国家公园、实施生态保护修复工程，三江源地区生态环境持续改善，水源涵养能力显著提升。</p>
+            <div class="flex items-center text-sm text-gray-500">
+              <span class="flex items-center mr-4"><i class="fa fa-tint text-primary mr-1"></i> 水源涵养量提升</span>
+              <span class="flex items-center"><i class="fa fa-calendar text-primary mr-1"></i> 2005年启动</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 案例卡片3 -->
+        <div class="bg-white rounded-xl overflow-hidden card-shadow hover-scale">
+          <div class="h-56 overflow-hidden">
+            <img src="https://picsum.photos/id/119/800/600" alt="洱海治理" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-primary mb-2">洱海生态保护治理</h3>
+            <p class="text-gray-600 mb-4">洱海是云南第二大淡水湖，曾面临水质恶化等问题。通过实施"环湖截污、生态搬迁、矿山整治"等措施，洱海水质持续改善，重现"高原明珠"的美丽风采。</p>
+            <div class="flex items-center text-sm text-gray-500">
+              <span class="flex items-center mr-4"><i class="fa fa-check-circle text-primary mr-1"></i> 水质稳定向好</span>
+              <span class="flex items-center"><i class="fa fa-calendar text-primary mr-1"></i> 2015年攻坚</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 环保知识 -->
+  <section id="knowledge" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-primary mb-4 poem-font">环保知识 · 知行合一</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">了解环保知识，才能更好地参与环保行动。以下是一些实用的环保知识和小贴士。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- 知识分类1 -->
+        <div class="bg-neutral rounded-xl p-6 card-shadow">
+          <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+            <i class="fa fa-home mr-2"></i> 家庭环保
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <div>
+                <h4 class="font-semibold">使用节能电器</h4>
+                <p class="text-gray-600 text-sm">选择能效等级高的电器，可节约用电30%-50%，既省钱又环保。</p>
+              </div>
+            </li>
+            <li class="flex">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <div>
+                <h4 class="font-semibold">自制天然清洁剂</h4>
+                <p class="text-gray-600 text-sm">用白醋、小苏打等天然材料自制清洁剂，减少化学物质对环境的污染。</p>
+              </div>
+            </li>
+            <li class="flex">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <div>
+                <h4 class="font-semibold">合理处理厨余垃圾</h4>
+                <p class="text-gray-600 text-sm">厨余垃圾可进行堆肥处理，制成有机肥料，实现资源循环利用。</p>
+              </div>
+            </li>
+            <li class="flex">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <div>
+                <h4 class="font-semibold">减少一次性用品</h4>
+                <p class="text-gray-600 text-sm">使用可重复使用的餐具、水杯、购物袋等，减少一次性用品的使用。</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 知识分类2 -->
+        <div class="bg-neutral rounded-xl p-6 card-shadow">
+          <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+            <i class="fa fa-leaf mr-2"></i> 自然保护
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <div>
+                <h4 class="font-semibold">保护生物多样性</h4>
+                <p class="text-gray-600 text-sm">不购买、不食用野生动物，不采集珍稀植物，保护生态平衡。</p>
+              </div>
+            </li>
+            <li class="flex">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <div>
+                <h4 class="font-semibold">节约用纸</h4>
+                <p class="text-gray-600 text-sm">纸张双面使用，减少纸张消耗，保护森林资源。</p>
+              </div>
+            </li>
+            <li class="flex">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <div>
+                <h4 class="font-semibold">减少农药使用</h4>
+                <p class="text-gray-600 text-sm">家庭种植可采用生物防治方法，减少化学农药对土壤和水源的污染。</p>
+              </div>
+            </li>
+            <li class="flex">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <div>
+                <h4 class="font-semibold">参与公益植树</h4>
+                <p class="text-gray-600 text-sm">积极参与各类植树造林活动，增加森林覆盖率，改善生态环境。</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 知识分类3 -->
+        <div class="bg-neutral rounded-xl p-6 card-shadow">
+          <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+            <i class="fa fa-briefcase mr-2"></i> 办公环保
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <div>
+                <h4 class="font-semibold">无纸化办公</h4>
+                <p class="text-gray-600 text-sm">尽量使用电子文档，减少纸质文件的打印，节约纸张和能源。</p>
+              </div>
+            </li>
+            <li class="flex">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <div>
+                <h4 class="font-semibold">合理使用空调</h4>
+                <p class="text-gray-600 text-sm">夏季空调温度不低于26℃，冬季不高于20℃，节约用电。</p>
+              </div>
+            </li>
+            <li class="flex">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <div>
+                <h4 class="font-semibold">节约办公用品</h4>
+                <p class="text-gray-600 text-sm">笔、笔记本等办公用品按需领用，避免浪费。</p>
+              </div>
+            </li>
+            <li class="flex">
+              <i class="fa fa-check text-primary mt-1 mr-3"></i>
+              <div>
+                <h4 class="font-semibold">绿色采购</h4>
+                <p class="text-gray-600 text-sm">优先采购环保、节能、可循环的办公用品和设备。</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- 环保小测试 -->
+      <div class="mt-16 bg-primary/5 rounded-xl p-8 border border-primary/20">
+        <h3 class="text-xl font-semibold text-primary mb-6 text-center">环保知识小测试</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white p-6 rounded-lg card-shadow">
+            <h4 class="font-semibold mb-3">1. 下列哪种行为不属于环保行为？</h4>
+            <div class="space-y-3">
+              <label class="flex items-center p-3 border rounded cursor-pointer hover:bg-neutral transition-colors">
+                <input type="radio" name="q1" class="mr-3"> A. 随手关灯
+              </label>
+              <label class="flex items-center p-3 border rounded cursor-pointer hover:bg-neutral transition-colors">
+                <input type="radio" name="q1" class="mr-3"> B. 使用一次性塑料袋
+              </label>
+              <label class="flex items-center p-3 border rounded cursor-pointer hover:bg-neutral transition-colors">
+                <input type="radio" name="q1" class="mr-3"> C. 垃圾分类投放
+              </label>
+              <label class="flex items-center p-3 border rounded cursor-pointer hover:bg-neutral transition-colors">
+                <input type="radio" name="q1" class="mr-3"> D. 步行或骑行上下班
+              </label>
+            </div>
+          </div>
+          <div class="bg-white p-6 rounded-lg card-shadow">
+            <h4 class="font-semibold mb-3">2. 下列哪种物品可以回收利用？</h4>
+            <div class="space-y-3">
+              <label class="flex items-center p-3 border rounded cursor-pointer hover:bg-neutral transition-colors">
+                <input type="radio" name="q2" class="mr-3"> A. 废电池
+              </label>
+              <label class="flex items-center p-3 border rounded cursor-pointer hover:bg-neutral transition-colors">
+                <input type="radio" name="q2" class="mr-3"> B. 果皮菜叶
+              </label>
+              <label class="flex items-center p-3 border rounded cursor-pointer hover:bg-neutral transition-colors">
+                <input type="radio" name="q2" class="mr-3"> C. 塑料瓶
+              </label>
+              <label class="flex items-center p-3 border rounded cursor-pointer hover:bg-neutral transition-colors">
+                <input type="radio" name="q2" class="mr-3"> D. 用过的纸巾
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-6">
+          <button class="bg-primary hover:bg-primary/90 text-white font-semibold py-2 px-6 rounded-full transition-all duration-300 hover:shadow-lg">
+            提交答案
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分享感悟 -->
+  <section id="share" class="py-20 bg-neutral">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-primary mb-4 poem-font">分享感悟 · 共同成长</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">分享你的环保故事、感悟或诗词创作，让更多人受到启发，一起参与到环保行动中来。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- 留言表单 -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-xl p-6 card-shadow">
+            <h3 class="text-xl font-semibold text-primary mb-4">分享你的感悟</h3>
+            <form id="shareForm" class="space-y-4">
+              <div>
+                <label for="name" class="block text-gray-700 mb-2">昵称</label>
+                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="请输入你的昵称">
+              </div>
+              <div>
+                <label for="type" class="block text-gray-700 mb-2">分享类型</label>
+                <select id="type" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                  <option value="story">环保故事</option>
+                  <option value="feeling">环保感悟</option>
+                  <option value="poem">环保诗词</option>
+                  <option value="action">环保行动</option>
+                </select>
+              </div>
+              <div>
+                <label for="content" class="block text-gray-700 mb-2">分享内容</label>
+                <textarea id="content" rows="6" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="请分享你的环保故事、感悟或诗词..."></textarea>
+              </div>
+              <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg">
+                提交分享
+              </button>
+            </form>
+          </div>
+        </div>
+        
+        <!-- 分享列表 -->
+        <div class="lg:col-span-2">
+          <h3 class="text-xl font-semibold text-primary mb-6">大家的分享</h3>
+          <div class="space-y-6 max-h-[600px] overflow-y-auto scrollbar-hide pr-2">
+            <!-- 分享内容1 -->
+            <div class="bg-white rounded-xl p-6 card-shadow hover-scale">
+              <div class="flex justify-between items-start mb-4">
+                <div class="flex items-center">
+                  <img src="https://picsum.photos/id/64/100/100" alt="用户头像" class="w-10 h-10 rounded-full object-cover mr-3">
+                  <div>
+                    <h4 class="font-semibold">李小明</h4>
+                    <p class="text-gray-500 text-sm">环保故事 · 3天前</p>
+                  </div>
+                </div>
+                <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">环保故事</span>
+              </div>
+              <p class="text-gray-600 mb-4">我坚持每周骑行上班3天，已经坚持了一年。不仅锻炼了身体，还为减少碳排放贡献了自己的一份力量。现在越来越多的同事也加入了骑行队伍，我们还组建了骑行爱好者群，定期组织环保骑行活动。</p>
+              <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center space-x-4">
+                  <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                    <i class="fa fa-thumbs-up mr-1"></i> 点赞(28)
+                  </button>
+                  <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                    <i class="fa fa-comment mr-1"></i> 评论(5)
+                  </button>
+                </div>
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                  <i class="fa fa-share mr-1"></i> 分享
+                </button>
+              </div>
+            </div>
             
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
+            <!-- 分享内容2 -->
+            <div class="bg-white rounded-xl p-6 card-shadow hover-scale">
+              <div class="flex justify-between items-start mb-4">
+                <div class="flex items-center">
+                  <img src="https://picsum.photos/id/65/100/100" alt="用户头像" class="w-10 h-10 rounded-full object-cover mr-3">
+                  <div>
+                    <h4 class="font-semibold">王芳</h4>
+                    <p class="text-gray-500 text-sm">环保诗词 · 1周前</p>
+                  </div>
+                </div>
+                <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">环保诗词</span>
+              </div>
+              <div class="text-gray-600 mb-4 poem-font text-center text-lg leading-relaxed">
+                护绿<br>
+                一抹新绿映朝霞，<br>
+                万缕清风拂嫩芽。<br>
+                莫让尘嚣遮望眼，<br>
+                留得青山惠万家。
+              </div>
+              <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center space-x-4">
+                  <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                    <i class="fa fa-thumbs-up mr-1"></i> 点赞(45)
+                  </button>
+                  <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                    <i class="fa fa-comment mr-1"></i> 评论(8)
+                  </button>
+                </div>
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                  <i class="fa fa-share mr-1"></i> 分享
+                </button>
+              </div>
+            </div>
+            
+            <!-- 分享内容3 -->
+            <div class="bg-white rounded-xl p-6 card-shadow hover-scale">
+              <div class="flex justify-between items-start mb-4">
+                <div class="flex items-center">
+                  <img src="https://picsum.photos/id/66/100/100" alt="用户头像" class="w-10 h-10 rounded-full object-cover mr-3">
+                  <div>
+                    <h4 class="font-semibold">张伟</h4>
+                    <p class="text-gray-500 text-sm">环保行动 · 2周前</p>
+                  </div>
+                </div>
+                <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">环保行动</span>
+              </div>
+              <p class="text-gray-600 mb-4">我和家人在自家阳台打造了一个小型植物园，种植了20多种花草和蔬菜。不仅美化了环境，还能收获新鲜的蔬菜。我们还利用厨余垃圾制作有机肥料，实现了资源的循环利用。现在邻居们也纷纷效仿，我们的小区越来越绿意盎然了。</p>
+              <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center space-x-4">
+                  <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                    <i class="fa fa-thumbs-up mr-1"></i> 点赞(36)
+                  </button>
+                  <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                    <i class="fa fa-comment mr-1"></i> 评论(6)
+                  </button>
+                </div>
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                  <i class="fa fa-share mr-1"></i> 分享
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-6">
+            <i class="fa fa-leaf text-accent text-2xl"></i>
+            <span class="text-xl font-bold">诗意环保</span>
+          </div>
+          <p class="text-gray-400 mb-6">传承古人对自然的敬畏之心，践行当代环保理念，让诗意山水永续流传。</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+              <i class="fa fa-weibo text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+              <i class="fa fa-wechat text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+              <i class="fa fa-instagram text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+              <i class="fa fa-youtube-play text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-6">快速链接</h3>
+          <ul class="space-y-3">
+            <li><a href="#home" class="text-gray-400 hover:text-accent transition-colors">首页</a></li>
+            <li><a href="#poems" class="text-gray-400 hover:text-accent transition-colors">诗词雅韵</a></li>
+            <li><a href="#status" class="text-gray-400 hover:text-accent transition-colors">环境现状</a></li>
+            <li><a href="#actions" class="text-gray-400 hover:text-accent transition-colors">环保行动</a></li>
+            <li><a href="#cases" class="text-gray-400 hover:text-accent transition-colors">成功案例</a></li>
+            <li><a href="#knowledge" class="text-gray-400 hover:text-accent transition-colors">环保知识</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-6">环保资源</h3>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">环保法律法规</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">环保组织名录</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">环保公益活动</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">环保科普资料</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">环境数据查询</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">环保志愿者招募</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-6">联系我们</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i class="fa fa-map-marker text-accent mt-1 mr-3"></i>
+              <span class="text-gray-400">北京市海淀区中关村环保科技园</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fa fa-phone text-accent mr-3"></i>
+              <span class="text-gray-400">400-123-4567</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fa fa-envelope text-accent mr-3"></i>
+              <span class="text-gray-400">contact@shiyihuanbao.org</span>
+            </li>
+          </ul>
+          <div class="mt-6">
+            <h4 class="font-semibold mb-3">订阅环保资讯</h4>
+            <div class="flex">
+              <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-dark">
+              <button class="bg-primary hover:bg-primary/90 px-4 rounded-r-lg transition-colors">
+                <i class="fa fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+        <p>© 2025 诗意环保 版权所有 | 京ICP备12345678号</p>
+        <p class="mt-2">本网站旨在传播环保理念，倡导绿色生活，共建美丽中国</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 环保承诺弹窗 -->
+  <div id="commitModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4 relative z-10 fade-in">
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-check-circle text-primary text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-primary mb-2">环保承诺成功！</h3>
+        <p class="text-gray-600">感谢您的环保承诺，让我们一起行动起来，共同守护绿水青山！</p>
+      </div>
+      <div class="bg-primary/5 p-4 rounded-lg mb-6">
+        <p class="text-center text-gray-700 italic">
+          "不积小流，无以成江海；不积跬步，无以至千里。"
+          <br>
+          <span class="text-sm text-gray-500 mt-2 block">—— 荀子《劝学》</span>
+        </p>
+      </div>
+      <button id="closeModal" class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg">
+        立即行动
+      </button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // 导航栏滚动效果
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-primary/95', 'bg-blur', 'shadow-lg');
+        navbar.classList.remove('bg-transparent');
+      } else {
+        navbar.classList.remove('bg-primary/95', 'bg-blur', 'shadow-lg');
+        navbar.classList.add('bg-transparent');
+      }
+    });
+    
+    // 移动端菜单切换
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    menuBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      menuBtn.innerHTML = isOpen ? '<i class="fa fa-times"></i>' : '<i class="fa fa-bars"></i>';
+    });
+    
+    // 碳排放趋势图表
+    const carbonChart = new Chart(
+      document.getElementById('carbonChart'),
+      {
+        type: 'line',
+        data: {
+          labels: ['2010', '2012', '2014', '2016', '2018', '2020', '2022', '2024'],
+          datasets: [
+            {
+              label: '全球碳排放',
+              data: [33.1, 34.5, 35.4, 36.3, 36.6, 34.8, 36.3, 36.8],
+              borderColor: '#2E7D32',
+              backgroundColor: 'rgba(46, 125, 50, 0.1)',
+              tension: 0.4,
+              fill: true
+            },
+            {
+              label: '中国碳排放',
+              data: [8.2, 8.9, 9.3, 9.9, 10.1, 9.9, 10.2, 10.5],
+              borderColor: '#0288D1',
+              backgroundColor: 'rgba(2, 136, 209, 0.1)',
+              tension: 0.4,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            tooltip: {
+              mode: 'index',
+              intersect: false,
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              grid: {
+                drawBorder: false,
+              }
+            },
+            x: {
+              grid: {
+                display: false,
+              }
+            }
+          }
         }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+      }
+    );
+    
+    // 环保承诺弹窗
+    const commitBtn = document.getElementById('commitBtn');
+    const commitModal = document.getElementById('commitModal');
+    const closeModal = document.getElementById('closeModal');
+    
+    commitBtn.addEventListener('click', function() {
+      commitModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    closeModal.addEventListener('click', function() {
+      commitModal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    });
+    
+    commitModal.addEventListener('click', function(e) {
+      if (e.target === commitModal) {
+        commitModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    });
+    
+    // 分享表单提交
+    const shareForm = document.getElementById('shareForm');
+    
+    shareForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const type = document.getElementById('type').value;
+      const content = document.getElementById('content').value;
+      
+      if (!name || !content) {
+        alert('请填写昵称和分享内容');
+        return;
+      }
+      
+      // 这里可以添加表单提交逻辑
+      alert('分享成功！感谢您的参与！');
+      shareForm.reset();
+    });
+    
+    // 滚动动画
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('section > div > div:not(.text-center)').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 </body>
-
 </html>
